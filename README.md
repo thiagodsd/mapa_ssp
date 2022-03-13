@@ -1,3 +1,3 @@
 # Mapa SSP
 
-.
+![](pipeline.png)

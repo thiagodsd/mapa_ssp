@@ -4,7 +4,7 @@ generated using Kedro 0.17.6
 """
 
 from kedro.pipeline import Pipeline, node
-from .nodes import baixa_csv
+from .nodes import baixa_csv, consolida
 
 
 def create_pipeline(**kwargs):
@@ -19,5 +19,14 @@ def create_pipeline(**kwargs):
                     ],
                 outputs=None,
                 name="baixa_csv",
-            )
+            ),
+        node(
+                consolida,
+                inputs=[
+                    "params:ano_ini_index",
+                    "params:ano_fim_index",
+                    ],
+                outputs="dados_ssp",
+                name="consolida",
+            ),
     ])
