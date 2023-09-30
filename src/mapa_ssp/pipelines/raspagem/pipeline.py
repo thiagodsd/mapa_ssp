@@ -4,12 +4,12 @@ generated using Kedro 0.18.13
 """
 
 from kedro.pipeline import Pipeline, node
-from .nodes import baixa_csv, consolida
+from .nodes import csv_download, consolida
 
 def create_pipeline(**kwargs) -> Pipeline:
     return Pipeline([
         node(
-                baixa_csv,
+                csv_download,
                 inputs=[
                     "params:ano_ini_index",
                     "params:ano_fim_index",
@@ -17,7 +17,7 @@ def create_pipeline(**kwargs) -> Pipeline:
                     "params:del_fim_index",
                     ],
                 outputs=None,
-                name="baixa_csv",
+                name="csv_download",
             ),
         node(
                 consolida,
