@@ -78,9 +78,3 @@ Badges (for open-source projects especially):
 Visual indicators related to project status, build status, coverage, etc. Examples include badges from Travis CI, Coveralls, etc.
 Remember, while this is a general guideline, you should tailor your README.md based on the project's requirements and the intended audience. The main goal is to make it as easy as possible for someone new to understand and get started with your project.
 ``` -->
-
-# development snippets
-
-```
-git config --global core.editor "vim" # avoid using nano
-```
