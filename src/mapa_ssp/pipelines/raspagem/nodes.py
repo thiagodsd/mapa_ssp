@@ -20,18 +20,30 @@ from selenium.webdriver.support import expected_conditions as EC
 import pandas as pd
 
 
-def baixa_csv(ano_ini:int, ano_fim:int, del_ini:int, del_fim:int) -> NoReturn:
+def csv_download(ano_ini:int, ano_fim:int, del_ini:int, del_fim:int) -> NoReturn:
     """
-    `todo` baixa_csv
+    This function downloads the csv files from the SSP website.
 
-    args:
-        ano_ini: int
-        ano_fim: int
-        del_ini: int
-        del_fim: int
+    User navigation example converted to xpath:
+    Ano = 2023               -> /html/body/div[3]/div/div[1]/form/div[3]/div[1]/div[2]/div[1]/div/select/option[2]
+    Região = Capital         -> /html/body/div[3]/div/div[1]/form/div[3]/div[1]/div[2]/div[2]/div/select/option[2]
+    Município = São Paulo    -> /html/body/div[3]/div/div[1]/form/div[3]/div[1]/div[3]/div[1]/div/select/option[2]
+    Delegacia = 001º D.P. SE -> /html/body/div[3]/div/div[1]/form/div[3]/div[1]/div[3]/div[2]/div/select/option[2]
+
+    taxa de delitos          -> //*[@id="conteudo_btnTaxa"]
+    ocorrências registradas  -> //*[@id="conteudo_btnMensal"]
+    produtividade policial   -> //*[@id="conteudo_btnPolicial"]
+
+    download excel           -> //*[@id="conteudo_btnExcel"]
+
+    Parameters:
+    - ano_ini (int) : initial year
+    - ano_fim (int) : final year
+    - del_ini (int) : initial police station
+    - del_fim (int) : final police station
     
-    return:
-        NoReturn
+    Returns:
+    (None): NoReturn
     """
 
     for ano_ind in range(ano_ini, ano_fim + 1): 
@@ -45,8 +57,6 @@ def baixa_csv(ano_ini:int, ano_fim:int, del_ini:int, del_fim:int) -> NoReturn:
         
         navegador = webdriver.Firefox(perfil)
         navegador.get('http://www.ssp.sp.gov.br/Estatistica/Pesquisa.aspx')
-        
-        
 
         for del_ind in range(del_ini, del_fim + 1): 
             WebDriverWait(navegador, 5).until(EC.element_to_be_clickable((By.XPATH, f'/html/body/div[3]/div/div[1]/form/div[3]/div[1]/div[2]/div[1]/div/select/option[{ano_ind}]'))).click()
