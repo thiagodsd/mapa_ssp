@@ -1,122 +1,80 @@
 # Mapa SSP
 
-## Overview
+`todo` description
 
-This is your new Kedro project, which was generated using `Kedro 0.17.6`.
+`todo` table of contents
 
-Take a look at the [Kedro documentation](https://kedro.readthedocs.io) to get started.
+`todo` installation
 
-## Rules and guidelines
+`todo` contributing
 
-In order to get the best out of the template:
+`todo` framework used
 
-* Don't remove any lines from the `.gitignore` file we provide
-* Make sure your results can be reproduced by following a [data engineering convention](https://kedro.readthedocs.io/en/stable/12_faq/01_faq.html#what-is-data-engineering-convention)
-* Don't commit data to your repository
-* Don't commit any credentials or your local configuration to your repository. Keep all your credentials and local configuration in `conf/local/`
+`todo` license
 
-## How to install dependencies
+`todo` credits
 
-Declare any dependencies in `src/requirements.txt` for `pip` installation and `src/environment.yml` for `conda` installation.
+`todo` contact
 
-To install them, run:
+<!-- ```
+A well-structured README.md is crucial for projects, especially open-source ones, as it's the first thing most people will look at when they visit your project's page. A generic README.md should typically include the following sections:
 
-```
-kedro install
-```
+Project Title:
 
-## How to run your Kedro pipeline
+A brief title of the project.
+Description:
 
-You can run your Kedro project with:
+A short paragraph or two describing what the project does.
+Mention the problem it solves or the need it addresses.
+Table of Contents (for large READMEs):
 
-```
-kedro run
-```
+Helps users navigate the document.
+Getting Started / Installation:
 
-## How to test your Kedro project
+Prerequisites: Software or tools that need to be installed beforehand.
+Installation steps: A step-by-step guide on how to get the project up and running locally.
+Usage:
 
-Have a look at the file `src/tests/test_run.py` for instructions on how to write your tests. You can run your tests as follows:
+Code examples, CLI commands, or screenshots that demonstrate how to use the project.
+Contribution:
 
-```
-kedro test
-```
+Guidelines for how others can contribute to the project.
+Could link to a separate CONTRIBUTING.md file.
+Testing:
 
-To configure the coverage threshold, go to the `.coveragerc` file.
+Instructions on how to run the tests.
+Build (if applicable):
 
-## Project dependencies
+Instructions and requirements for building the project from source.
+Deployment:
 
-To generate or update the dependency requirements for your project:
+Guidance on how to deploy or integrate the project in a live environment.
+Technologies/Frameworks Used:
 
-```
-kedro build-reqs
-```
+A list of technologies, libraries, and frameworks used in the project.
+License:
 
-This will copy the contents of `src/requirements.txt` into a new file `src/requirements.in` which will be used as the source for `pip-compile`. You can see the output of the resolution by opening `src/requirements.txt`.
+Information about the project's license (or a link to the LICENSE file).
+Acknowledgments:
 
-After this, if you'd like to update your project requirements, please update `src/requirements.in` and re-run `kedro build-reqs`.
+Shout-outs, credits, references, or other recognitions.
+Authors/Contributors:
 
-[Further information about project dependencies](https://kedro.readthedocs.io/en/stable/04_kedro_project_setup/01_dependencies.html#project-specific-dependencies)
+Information about the people involved in the project.
+Contact:
 
-## How to work with Kedro and notebooks
+How to reach the maintainers or the community. Could be an email, a project forum, etc.
+Changelog/History:
 
-> Note: Using `kedro jupyter` or `kedro ipython` to run your notebook provides these variables in scope: `context`, `catalog`, and `startup_error`.
->
-> Jupyter, JupyterLab, and IPython are already included in the project requirements by default, so once you have run `kedro install` you will not need to take any extra steps before you use them.
+A brief overview of the version history or a link to a CHANGELOG.md file.
+FAQ:
 
-### Jupyter
-To use Jupyter notebooks in your Kedro project, you need to install Jupyter:
+Answers to commonly asked questions, if any exist.
+Screenshots/GIFs/Demo:
 
-```
-pip install jupyter
-```
+Visual representation can be helpful for front-end projects or tools with a UI component.
+Badges (for open-source projects especially):
 
-After installing Jupyter, you can start a local notebook server:
-
-```
-kedro jupyter notebook
-```
-
-### JupyterLab
-To use JupyterLab, you need to install it:
-
-```
-pip install jupyterlab
-```
-
-You can also start JupyterLab:
-
-```
-kedro jupyter lab
-```
-
-### IPython
-And if you want to run an IPython session:
-
-```
-kedro ipython
-```
-
-### How to convert notebook cells to nodes in a Kedro project
-You can move notebook code over into a Kedro project structure using a mixture of [cell tagging](https://jupyter-notebook.readthedocs.io/en/stable/changelog.html#release-5-0-0) and Kedro CLI commands.
-
-By adding the `node` tag to a cell and running the command below, the cell's source code will be copied over to a Python file within `src/<package_name>/nodes/`:
-
-```
-kedro jupyter convert <filepath_to_my_notebook>
-```
-> *Note:* The name of the Python file matches the name of the original notebook.
-
-Alternatively, you may want to transform all your notebooks in one go. Run the following command to convert all notebook files found in the project root directory and under any of its sub-folders:
-
-```
-kedro jupyter convert --all
-```
-
-### How to ignore notebook output cells in `git`
-To automatically strip out all output cell contents before committing to `git`, you can run `kedro activate-nbstripout`. This will add a hook in `.git/config` which will run `nbstripout` before anything is committed to `git`.
-
-> *Note:* Your output cells will be retained locally.
-
-## Package your Kedro project
-
-[Further information about building project documentation and packaging your project](https://kedro.readthedocs.io/en/stable/03_tutorial/05_package_a_project.html)
+Visual indicators related to project status, build status, coverage, etc. Examples include badges from Travis CI, Coveralls, etc.
+Remember, while this is a general guideline, you should tailor your README.md based on the project's requirements and the intended audience. The main goal is to make it as easy as possible for someone new to understand and get started with your project.
+``` -->

@@ -1,6 +1,6 @@
 """
 This is a boilerplate test file for pipeline 'raspagem'
-generated using Kedro 0.17.6.
+generated using Kedro 0.18.13.
 Please add your pipeline tests here.
 
 Kedro recommends using `pytest` framework, more info about it can be found
