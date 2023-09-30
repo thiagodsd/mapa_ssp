@@ -1,16 +1,30 @@
 # Mapa SSP
 
+## Description
+
 `todo` description
+
+## Table of Contents
 
 `todo` table of contents
 
+## Installation
+
 `todo` installation
+
+## Contributing
 
 `todo` contributing
 
+## Frameworks
+
 `todo` framework used
 
+## License
+
 `todo` license
+
+## Authors
 
 `todo` credits
 
@@ -78,3 +92,7 @@ Badges (for open-source projects especially):
 Visual indicators related to project status, build status, coverage, etc. Examples include badges from Travis CI, Coveralls, etc.
 Remember, while this is a general guideline, you should tailor your README.md based on the project's requirements and the intended audience. The main goal is to make it as easy as possible for someone new to understand and get started with your project.
 ``` -->
+
+# development snippets
+
+`todo` development snippets
