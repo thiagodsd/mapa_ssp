@@ -1,4 +1,0 @@
-dados_ssp:
-  type: pandas.CSVDataSet
-  filepath: data/03_primary/dados_ssp.csv
-  layer: primary
