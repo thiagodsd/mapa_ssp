@@ -4,29 +4,30 @@ generated using Kedro 0.18.13
 """
 
 from kedro.pipeline import Pipeline, node
-from .nodes import csv_download, consolida
+from .nodes import download_data, data_aggregation
 
 def create_pipeline(**kwargs) -> Pipeline:
     return Pipeline([
         node(
-                csv_download,
+                download_data,
                 inputs=[
-                    "params:ano_ini_index",
-                    "params:ano_fim_index",
-                    "params:del_ini_index",
-                    "params:del_fim_index",
+                    "params:year_start_index",
+                    "params:year_end_index",
+                    "params:pol_station_start_index",
+                    "params:pol_station_end_index",
                     ],
-                outputs=None,
-                name="csv_download",
+                outputs="download_data_status",
+                name="download_data",
             ),
         node(
-                consolida,
+                data_aggregation,
                 inputs=[
-                    "params:ano_ini_index",
-                    "params:ano_fim_index",
+                    "params:year_start_index",
+                    "params:year_end_index",
+                    "download_data_status"
                     ],
-                outputs="dados_ssp",
-                name="consolida",
+                outputs="ssp_data",
+                name="data_aggregation",
             ),
     ])
 
