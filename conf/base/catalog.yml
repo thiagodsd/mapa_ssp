@@ -1,4 +1,10 @@
-dados_ssp:
+download_data_status:
+  type: pickle.PickleDataSet
+  filepath: data/03_primary/download_data_status.pkl
+  backend: pickle
+  layer: primary
+
+ssp_data:
   type: pandas.CSVDataSet
-  filepath: data/03_primary/dados_ssp.csv
+  filepath: data/03_primary/ssp_data.csv
   layer: primary

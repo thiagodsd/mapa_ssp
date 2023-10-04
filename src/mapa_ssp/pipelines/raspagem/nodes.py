@@ -20,7 +20,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import pandas as pd
 
 
-def csv_download(ano_ini:int, ano_fim:int, del_ini:int, del_fim:int) -> NoReturn:
+def download_data(initial_year_id:int, final_year_id:int, initial_station_id:int, final_station_id:int) -> bool:
     """
     This function downloads the csv files from the SSP website.
 
@@ -37,18 +37,18 @@ def csv_download(ano_ini:int, ano_fim:int, del_ini:int, del_fim:int) -> NoReturn
     download excel           -> //*[@id="conteudo_btnExcel"]
 
     Parameters:
-    - ano_ini (int) : initial year
-    - ano_fim (int) : final year
-    - del_ini (int) : initial police station
-    - del_fim (int) : final police station
+    - initial_year_id(int)    : initial year
+    - final_year_id(int)      : final year
+    - initial_station_id(int) : initial police station
+    - final_station_id(int)   : final police station
     
     Returns:
-    (None): NoReturn
+    (bool): download status, true if the download was successful
     """
 
-    for ano_ind in range(ano_ini, ano_fim + 1): 
+    for _year_index in range(initial_year_id, final_year_id + 1):
         pwd = os.getcwd()
-        dir = rf'{pwd}/data/01_raw/{ano_ind}'
+        dir = rf'{pwd}/data/01_raw/{_year_index}'
         os.makedirs(dir, exist_ok=True)
 
         perfil = webdriver.FirefoxProfile()
@@ -57,33 +57,35 @@ def csv_download(ano_ini:int, ano_fim:int, del_ini:int, del_fim:int) -> NoReturn
         
         navegador = webdriver.Firefox(perfil)
         navegador.get('http://www.ssp.sp.gov.br/Estatistica/Pesquisa.aspx')
-
-        for del_ind in range(del_ini, del_fim + 1): 
-            WebDriverWait(navegador, 5).until(EC.element_to_be_clickable((By.XPATH, f'/html/body/div[3]/div/div[1]/form/div[3]/div[1]/div[2]/div[1]/div/select/option[{ano_ind}]'))).click()
+        
+        for del_ind in range(initial_station_id, final_station_id + 1): 
+            WebDriverWait(navegador, 5).until(EC.element_to_be_clickable((By.XPATH, f'/html/body/div[3]/div/div[1]/form/div[3]/div[1]/div[2]/div[1]/div/select/option[{_year_index}]'))).click()
             WebDriverWait(navegador, 5).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="conteudo_ddlRegioes"]/option[2]'))).click()
             WebDriverWait(navegador, 5).until(EC.element_to_be_clickable((By.XPATH, f'//*[@id="conteudo_ddlDelegacias"]/option[{del_ind}]'))).click()
             WebDriverWait(navegador, 5).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="conteudo_btnExcel"]'))).click()
     
         navegador.close()
+    
+    return True
 
 
-def consolida(ano_ini:int, ano_fim:int) -> pd.DataFrame:
+def data_aggregation(initial_year_id:int, final_year_id:int, download_status:bool) -> pd.DataFrame:
     """
-    consolida
+    `todo` add docstring
     """
     df = pd.DataFrame()
     meses = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
 
 
-    for ano_ind in range(ano_ini_index, ano_fim_index+1):
-        for (_, _, files) in os.walk(rf"Documents/github/mapa-ssp/data/01_raw/{ano_ind}/"):
+    for _year_index in range(initial_year_id_index, final_year_id_index+1):
+        for (_, _, files) in os.walk(rf"Documents/github/mapa-ssp/data/01_raw/{_year_index}/"):
             for filename in sorted(files):
                 if ".csv" in filename:
                     delegacia = filename.split("ProdutividadePolicial-Delegacia")[-1].replace(".csv", "").strip()                
                     ano = int()
                     data = list()
                     missing = False
-                    with open(rf"Documents/github/mapa-ssp/data/01_raw/{ano_ind}/{filename}", 'r', encoding="latin-1") as f:
+                    with open(rf"Documents/github/mapa-ssp/data/01_raw/{_year_index}/{filename}", 'r', encoding="latin-1") as f:
                         for line in f:
                             if ";" in line:
                                 data.append([i.replace("\x00", "") for i in line.rstrip().split(";")])

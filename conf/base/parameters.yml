@@ -1,5 +1,5 @@
-ano_ini_index: 2
-ano_fim_index: 17
+year_start_index: 2
+year_end_index: 17
 
-del_ini_index: 2
-del_fim_index: 120
+pol_station_start_index: 2
+pol_station_end_index: 120
