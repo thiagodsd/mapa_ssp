@@ -1,13 +1,18 @@
 """
-This is a boilerplate pipeline 'raspagem'
-generated using Kedro 0.18.13
-"""
+User navigation example converted to xpath:
 
-"""
-This is a boilerplate pipeline 'raspagem'
-generated using Kedro 0.17.6
-"""
+* Ano = 2023: ``/html/body/div[3]/div/div[1]/form/div[3]/div[1]/div[2]/div[1]/div/select/option[2]``
+* Região = Capital:  ``/html/body/div[3]/div/div[1]/form/div[3]/div[1]/div[2]/div[2]/div/select/option[2]``
+* Município = São Paulo: ``/html/body/div[3]/div/div[1]/form/div[3]/div[1]/div[3]/div[1]/div/select/option[2]``
+* Delegacia = 001º D.P. SE: ``/html/body/div[3]/div/div[1]/form/div[3]/div[1]/div[3]/div[2]/div/select/option[2]``
 
+Buttons:
+
+* taxa de delitos: ``//*[@id="conteudo_btnTaxa"]``
+* ocorrências registradas: ``//*[@id="conteudo_btnMensal"]``
+* produtividade policial: ``//*[@id="conteudo_btnPolicial"]``
+* download excel: ``//*[@id="conteudo_btnExcel"]``
+"""
 
 import os
 from typing import NoReturn
@@ -21,30 +26,25 @@ import pandas as pd
 
 
 def download_data(initial_year_id:int, final_year_id:int, initial_station_id:int, final_station_id:int) -> bool:
-    """
-    This function downloads the csv files from the SSP website.
+    r"""This function downloads the csv files from the SSP website.
 
-    User navigation example converted to xpath:
-    Ano = 2023               -> /html/body/div[3]/div/div[1]/form/div[3]/div[1]/div[2]/div[1]/div/select/option[2]
-    Região = Capital         -> /html/body/div[3]/div/div[1]/form/div[3]/div[1]/div[2]/div[2]/div/select/option[2]
-    Município = São Paulo    -> /html/body/div[3]/div/div[1]/form/div[3]/div[1]/div[3]/div[1]/div/select/option[2]
-    Delegacia = 001º D.P. SE -> /html/body/div[3]/div/div[1]/form/div[3]/div[1]/div[3]/div[2]/div/select/option[2]
-
-    taxa de delitos          -> //*[@id="conteudo_btnTaxa"]
-    ocorrências registradas  -> //*[@id="conteudo_btnMensal"]
-    produtividade policial   -> //*[@id="conteudo_btnPolicial"]
-
-    download excel           -> //*[@id="conteudo_btnExcel"]
-
-    Parameters:
-    - initial_year_id(int)    : initial year
-    - final_year_id(int)      : final year
-    - initial_station_id(int) : initial police station
-    - final_station_id(int)   : final police station
+    Parameters
+    ----------
+    * initial_year_id : int
+        initial year index
+    * final_year_id : int
+        final year index
+    * initial_station_id : int
+        initial police station index
+    * final_station_id : int
+        final police station index
     
-    Returns:
-    (bool): download status, true if the download was successful
+    Returns
+    -------
+    status : bool
+        download status, true if the download was successful.
     """
+    status = False
 
     for _year_index in range(initial_year_id, final_year_id + 1):
         pwd = os.getcwd()
@@ -66,7 +66,9 @@ def download_data(initial_year_id:int, final_year_id:int, initial_station_id:int
     
         navegador.close()
     
-    return True
+    status = True
+
+    return status
 
 
 def data_aggregation(initial_year_id:int, final_year_id:int, download_status:bool) -> pd.DataFrame:
