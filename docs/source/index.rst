@@ -3,30 +3,17 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Mapa SSP's documentation!
-====================================
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
-
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+Mapa SSP's documentation
+========================
 
 Introduction
 ============
 
 Describe your Kedro project, its goals, datasets, pipelines, etc.
 
+.. toctree::
+   :maxdepth: 2
 
-Modules
-=======
+   scrapping
 
-.. automodule:: mapa_ssp.pipelines.raspagem
-   :members:
+
