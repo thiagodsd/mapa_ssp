@@ -1,8 +1,3 @@
-"""
-This is a boilerplate pipeline 'raspagem'
-generated using Kedro 0.18.13
-"""
-
 from kedro.pipeline import Pipeline, node
 from .nodes import download_data, data_aggregation
 
