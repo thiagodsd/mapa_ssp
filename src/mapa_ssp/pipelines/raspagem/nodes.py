@@ -14,15 +14,16 @@ Buttons:
 * download excel: ``//*[@id="conteudo_btnExcel"]``
 """
 
+import functools
+import multiprocessing as mp
 import os
 from typing import NoReturn
 
+import pandas as pd
 from selenium import webdriver
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-
-import pandas as pd
+from selenium.webdriver.support.ui import WebDriverWait
 
 
 def download_data(initial_year_id:int, final_year_id:int, initial_station_id:int, final_station_id:int) -> bool:
@@ -51,18 +52,42 @@ def download_data(initial_year_id:int, final_year_id:int, initial_station_id:int
         dir = rf'{pwd}/data/01_raw/{_year_index}'
         os.makedirs(dir, exist_ok=True)
 
-        perfil = webdriver.FirefoxProfile()
-        perfil.set_preference("browser.download.folderList", 2)
-        perfil.set_preference('browser.download.dir', dir)
-        
-        navegador = webdriver.Firefox(perfil)
+        # perfil = webdriver.FirefoxProfile()
+        # perfil.set_preference("browser.download.folderList", 2)
+        # perfil.set_preference('browser.download.dir', dir)
+        # navegador = webdriver.Firefox(perfil)
+
+        navegador = webdriver.Firefox()
         navegador.get('http://www.ssp.sp.gov.br/Estatistica/Pesquisa.aspx')
         
-        for del_ind in range(initial_station_id, final_station_id + 1): 
-            WebDriverWait(navegador, 5).until(EC.element_to_be_clickable((By.XPATH, f'/html/body/div[3]/div/div[1]/form/div[3]/div[1]/div[2]/div[1]/div/select/option[{_year_index}]'))).click()
-            WebDriverWait(navegador, 5).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="conteudo_ddlRegioes"]/option[2]'))).click()
-            WebDriverWait(navegador, 5).until(EC.element_to_be_clickable((By.XPATH, f'//*[@id="conteudo_ddlDelegacias"]/option[{del_ind}]'))).click()
-            WebDriverWait(navegador, 5).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="conteudo_btnExcel"]'))).click()
+        for _station_index in range(initial_station_id, final_station_id + 1): 
+            try:
+                WebDriverWait(navegador, 3).until(EC.element_to_be_clickable((By.XPATH, f'/html/body/div[3]/div/div[1]/form/div[3]/div[1]/div[2]/div[1]/div/select/option[{_year_index}]'))).click()
+                WebDriverWait(navegador, 3).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="conteudo_ddlRegioes"]/option[2]'))).click()
+                WebDriverWait(navegador, 3).until(EC.element_to_be_clickable((By.XPATH, f'//*[@id="conteudo_ddlDelegacias"]/option[{_station_index}]'))).click()
+            except Exception as e:
+                pass
+            
+            # produtividade policial
+            try:
+                WebDriverWait(navegador, 3).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="conteudo_btnPolicial"]'))).click()
+                WebDriverWait(navegador, 3).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="conteudo_btnExcel"]'))).click()
+            except Exception as e:
+                pass
+            
+            # ocorrências registradas
+            try:
+                WebDriverWait(navegador, 3).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="conteudo_btnMensal"]'))).click()
+                WebDriverWait(navegador, 3).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="conteudo_btnExcel"]'))).click()
+            except Exception as e:
+                pass
+            
+            # taxa de delitos
+            try:
+                WebDriverWait(navegador, 3).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="conteudo_btnTaxa"]"]'))).click()
+                WebDriverWait(navegador, 3).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="conteudo_btnExcel"]'))).click()
+            except Exception as e:
+                pass
     
         navegador.close()
     
